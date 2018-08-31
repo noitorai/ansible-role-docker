@@ -1,8 +1,10 @@
+dependencies: []
+
 galaxy_info:
   author: noitorai
   description: Anshible role to install Docker CE
 
-  license: license (Apache 2.0)
+  license: license (Apache)
 
   min_ansible_version: 2.4
 
