@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: ansible_push
+  ansible_config: test/ansible.cfg
+  chef_bootstrap_url: false
+  diff: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+
+suites:
+  - name: default
+    provisioner:
+      playbook: test/integration/default/site.yml
