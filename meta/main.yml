@@ -1,6 +1,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: docker
   author: noitorai
   description: Anshible role to install Docker CE
 
