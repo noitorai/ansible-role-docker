@@ -1,0 +1,13 @@
+---
+language: python
+
+sudo: required
+
+install:
+  - pip install ansible
+  - gem install bundle
+  - bundle install
+
+script:
+  - kitchen diagnose --all
+  - kitchen test
