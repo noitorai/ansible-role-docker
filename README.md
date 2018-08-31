@@ -1,6 +1,8 @@
 Role Name
 =========
 
+[![Build Status](https://travis-ci.org/noitorai/ansible-role-docker.svg?branch=master)](https://travis-ci.org/noitorai/ansible-role-docker)
+
 Ansible role to install Docker CE
 
 Requirements
