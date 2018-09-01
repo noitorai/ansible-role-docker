@@ -1,28 +1,7 @@
 ---
 # tasks file for ansible-role-docker
-- name: install dependent packages
-  yum:
-    name: "{{ item }}"
-  with_items:
-    - yum-utils
-    - device-mapper-persistent-data
-    - lvm2
-- name: add repository
-  command: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
-  args:
-    creates: /etc/yum.repos.d/docker-ce.repo
-- name: install docker-ce
-  yum:
-    name: docker-ce
-- name: start and enable docker 
-  service:
-    name: docker
-    state: started
-    enabled: true
-- name: append docker group 
-  user:
-    name: "{{ item }}"
-    append: true
-    groups: docker
-  with_items: "{{ docker_privileged_users }}"
-  when: docker_privileged_users
+- include_tasks: setup-Redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'

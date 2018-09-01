@@ -1,0 +1,52 @@
+---
+- name: update apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: install dependent packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: add Docker offical GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: verify fingerprint
+  command: "apt-key fingerprint 0EBFCD88"
+  register: verify_fingerprint
+  failed_when: "'9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88' not in verify_fingerprint.stdout"
+  changed_when: false
+
+  # failed_when: verify_fingerprint.stdout is not search("/9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88/")
+
+- name: add repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: install docker-ce
+  apt:
+    name: docker-ce
+    update_cache: true
+
+- name: start and enable docker
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: append docker group 
+  user:
+    name: "{{ item }}"
+    append: true
+    groups: docker
+  with_items: "{{ docker_privileged_users }}"
+  when: docker_privileged_users

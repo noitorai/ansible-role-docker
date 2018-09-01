@@ -1,18 +1,31 @@
 ---
 driver:
-  name: docker
+#  name: docker
+  name: vagrant
 
 provisioner:
   name: ansible_push
   ansible_config: test/ansible.cfg
   chef_bootstrap_url: false
   diff: true
+#  raw_arguments: "-vvv"
 
 verifier:
   name: inspec
 
 platforms:
   - name: centos-7
+    driver:
+      box: centos/7
+      provider: libvirt
+  - name: ubuntu-1604
+    driver:
+      box: generic/ubuntu1604
+      provider: libvirt
+      provision: true
+      vagrantfiles:
+        - Vagrantfile.rb
+    
 
 suites:
   - name: default
