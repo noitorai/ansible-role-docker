@@ -1,13 +1,11 @@
 ---
 language: python
-
 sudo: required
-
-install:
-  - pip install ansible
+before_install:
+  - sudo pip install ansible urllib3 pyOpenSSL ndg-httpsclient pyasn1
   - gem install bundle
   - bundle install
 
 script:
-  - kitchen diagnose --all
-  - kitchen test
+  - (cd ./test; ansible-playbook -i localhost, ./integration/default/site.yml -c local)
+  - bundle exec inspec exec test/integration/default/inspec/docker.rb

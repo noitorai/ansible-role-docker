@@ -1,5 +1,8 @@
 ---
 - hosts: all
   become: true
+  vars:
+    docker_privileged_users:
+      - "{{ ansible_env.SUDO_USER }}"
   roles:
     - ansible-role-docker
