@@ -69,6 +69,7 @@ Vagrant.configure("2") do |config|
   # SHELL
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y python python-apt
+    apt-get install -y python python-apt python-pip
+    pip install ndg-httpsclient
   SHELL
 end

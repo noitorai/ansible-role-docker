@@ -18,14 +18,20 @@ platforms:
     driver:
       box: centos/7
       provider: libvirt
-  - name: ubuntu-1604
+  - name: ubuntu-16.04
     driver:
       box: generic/ubuntu1604
       provider: libvirt
       provision: true
       vagrantfiles:
         - Vagrantfile.rb
-    
+  - name: ubuntu-14.04
+    driver:
+      box: ubuntu/trusty64
+      provider: libvirt
+      provision: true
+      vagrantfiles:
+        - Vagrantfile.rb
 
 suites:
   - name: default
