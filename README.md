@@ -26,10 +26,34 @@ Example Playbook
 ```
 - hosts: all
   roles:
-     - { role: noitorai.docker }
+     - noitorai.docker
 ```
+
+Testing the role
+----------------
+
+This role uses Test Kitchen that consists of the followings.
+
+- dirver: kitchen-vagrant (with vagrant-libvirt)
+- privisioner: kitchen-ansiblepush
+- platforms:
+  - CentOS 7 (box: centos/7)
+  - Ubuntu 14.04 (box: ubuntu/trusty64 converted from the VirtualBox image by vagrant-mutate)
+  - Ubuntu 16.04 (box: generic/ubuntu1604)
+
+### Depencencies
+
+- Bundler: 1.11.2+
+- Ruby: 2.3.1+
+- Vagrant: 2.0.2+
+
+### How to test
+
+1. `gem install bundler`
+2. `bundle install`
+3. `bundle exec test`
 
 License
 -------
 
-Apache
+[Apache License 2.0](LICENSE)
