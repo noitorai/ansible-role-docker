@@ -2,7 +2,7 @@
 language: python
 sudo: required
 before_install:
-  - sudo pip install ansible urllib3 pyOpenSSL ndg-httpsclient pyasn1
+  - sudo pip install ansible
   - gem install bundle
   - bundle install
 
